@@ -46,6 +46,7 @@ void set_variant_props(const variant_info& variant) {
     set_ro_build_prop("mod_device", variant.mod_device, true);
     set_ro_build_prop("model", variant.model, true);
     property_override("vendor.usb.product_string", marketname, true);
+    property_override("ro.boot.hardware.sku", variant.hwsku, true);
 
     if (access("/system/bin/recovery", F_OK) != 0) {
         property_override("bluetooth.device.default_name", marketname, true);
