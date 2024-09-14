@@ -13,7 +13,16 @@ vendor/lib/rfsa/adsp/capi_v2_aptX_CLHDAD_Speech_Decoder.so
 
 # Audio
 vendor/lib/libadm.so
+vendor/lib/libaudioparsers.so
+vendor/lib/libbatterylistener.so
+vendor/lib/libcomprcapture.so
+vendor/lib/libexthwplugin.so
+vendor/lib/libhdmiedid.so
+vendor/lib/libhdmipassthru.so
+vendor/lib/libhfp.so
 vendor/lib/libqtigef.so
+vendor/lib/libsndmonitor.so
+vendor/lib/libspkrprot.so
 
 # Audio FX modules
 vendor/lib/soundfx/libasphere.so
