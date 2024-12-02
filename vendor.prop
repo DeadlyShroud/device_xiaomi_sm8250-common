@@ -206,7 +206,6 @@ ro.hardware.keystore_desede=true
 
 # Media
 ro.odm.build.media_performance_class=30
-vendor.media.omx=0
 
 # NFC
 ro.camera.notify_nfc=1
