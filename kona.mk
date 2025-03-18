@@ -258,6 +258,25 @@ $(call soong_config_set,lineage_health,charging_control_charging_enabled,0)
 $(call soong_config_set,lineage_health,charging_control_charging_disabled,1)
 $(call soong_config_set_bool,lineage_health,charging_control_supports_bypass,false)
 
+# Logging
+ SPAMMY_LOG_TAGS := \
+     MiClstc \
+     MiStcImpl \
+     SDM \
+     SRE \
+     android.hardware.power-service-qti \
+     libsensor-boledalgo \
+     libsensor-parseRGB \
+     libsensor-qshcalapi \
+     sensors \
+     vendor.qti.hardware.display.composer-service \
+     vendor.xiaomi.sensor.citsensorservice-service.aidl
+
+ ifneq ($(TARGET_BUILD_VARIANT),eng)
+ PRODUCT_VENDOR_PROPERTIES += \
+     $(foreach tag,$(SPAMMY_LOG_TAGS),log.tag.$(tag)=E)
+ endif
+
 # Media configs
 PRODUCT_PACKAGES += \
     media_codecs_c2.xml \
