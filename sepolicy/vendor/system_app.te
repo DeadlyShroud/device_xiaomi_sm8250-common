@@ -1,3 +1,4 @@
+allow system_app sysfs_thermal:file { rw_file_perms getattr };
 allow system_app zygote:unix_stream_socket getopt;
 allow system_app user_profile_data_file:dir read;
 allow system_app sysfs_zram:file { getattr open read };
