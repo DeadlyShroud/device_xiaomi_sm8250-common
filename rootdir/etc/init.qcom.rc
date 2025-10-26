@@ -743,6 +743,13 @@ service vendor.power_off_alarm /vendor/bin/power_off_alarm
     disabled
     oneshot
 
+service vendor.charger /system/bin/chargeonlymode
+    class charger
+    user system
+    group system graphics input
+    capabilities SYS_BOOT
+    seclabel u:r:charger:s0
+
 service vendor.hbtp /vendor/bin/hbtp_daemon
      class main
      user system
