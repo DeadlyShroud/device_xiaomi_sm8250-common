@@ -319,6 +319,7 @@ PRODUCT_PACKAGES += \
     FrameworkResOverlayCommon \
     LineageSDKOverlayCommon \
     LineageSettingsOverlayCommon \
+    LineageDialerInCallUIOverlay \
     SettingsOverlayCommon \
     SettingsProviderOverlayCommon \
     SystemUIOverlayCommon \
