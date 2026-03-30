@@ -193,6 +193,9 @@ $(call soong_config_set,surfaceflinger,udfps_lib,//hardware/xiaomi:libudfps_exte
 endif
 endif
 
+# GameBar Performance Overlay
+$(call inherit-product, packages/apps/GameBar/gamebar.mk)
+
 # Health
 PRODUCT_PACKAGES += \
     android.hardware.health-service.qti
