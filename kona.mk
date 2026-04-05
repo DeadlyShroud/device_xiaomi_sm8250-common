@@ -412,6 +412,10 @@ $(call inherit-product, vendor/qcom/opensource/vibrator/vibrator-vendor-product.
 endif
 endif
 
+# ViPER4AndroidFX
+PRODUCT_PACKAGES += \
+    ViPER4AndroidFX
+
 # Wi-Fi
 PRODUCT_PACKAGES += \
     android.hardware.wifi-service \
