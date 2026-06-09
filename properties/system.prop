@@ -21,6 +21,9 @@ persist.vendor.dpm.feature=1
 # FUSE
 persist.sys.fuse.passthrough.enable=true
 
+# FS-verity
+ro.apk_verity.mode=2
+
 # Fake encryption
 ro.crypto.state=encrypted
 
