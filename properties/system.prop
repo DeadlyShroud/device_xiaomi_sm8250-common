@@ -38,5 +38,8 @@ persist.vendor.radio.report_codec=1
 # Thermal Path
 vendor.sys.thermal.data.path=/data/vendor/thermal/
 
+# SurfaceFlinger
+debug.renderengine.blur_algorithm=kawase2_fix_aliasing
+
 # Zygote
 persist.device_config.runtime_native.usap_pool_enabled=true
