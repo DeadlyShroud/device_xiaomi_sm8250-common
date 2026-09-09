@@ -1,4 +1,4 @@
-# Unpinned blobs from munch-user 13 RKQ1.211001.001 V816.0.9.0.ULMMIXM release-keys
+# Unpinned blobs from munch-user 13 RKQ1.211001.001 V816.0.12.0.ULMMIXM release-keys
 
 # ADSP
 vendor/bin/adsprpcd
@@ -309,6 +309,8 @@ vendor/bin/xtra-daemon
 vendor/bin/xtwifi-client
 vendor/bin/xtwifi-inet-agent
 vendor/etc/cacert_location.pem
+vendor/etc/gpfspath_oem_config.xml
+vendor/etc/seccomp_policy/qti-systemd.policy
 vendor/etc/xtra_root_cert.pem
 vendor/lib64/libaoa.so
 vendor/lib64/libasn1cper.so
@@ -470,15 +472,20 @@ vendor/lib64/unnhal-acc-hvx.so
 vendor/bin/nv_mac
 
 # OMX
+vendor/lib/libOmxAacEnc.so
 vendor/lib/libOmxAacDec.so
 vendor/lib/libOmxAlacDec.so
+vendor/lib/libOmxAmrEnc.so
 vendor/lib/libOmxAmrDec.so
 vendor/lib/libOmxAmrwbplusDec.so
 vendor/lib/libOmxApeDec.so
 vendor/lib/libOmxDsdDec.so
 vendor/lib/libOmxEvrcDec.so
+vendor/lib/libOmxEvrcEnc.so
 vendor/lib/libOmxG711Dec.so
+vendor/lib/libOmxG711Enc.so
 vendor/lib/libOmxQcelp13Dec.so
+vendor/lib/libOmxQcelp13Enc.so
 vendor/lib/libOmxVideoDSMode.so;DISABLE_CHECKELF
 vendor/lib/libOmxVpp.so;DISABLE_CHECKELF
 vendor/lib/libOmxWmaDec.so
@@ -533,6 +540,9 @@ vendor/lib64/libqmi_csi.so
 vendor/lib64/libqmi_encdec.so
 vendor/lib64/libqmi_legacy.so
 vendor/lib64/libqmiservices.so
+
+# QTI Radio helper services
+vendor/bin/mutualex
 
 # RIL
 system_ext/app/QtiTelephonyService/QtiTelephonyService.apk
@@ -615,6 +625,8 @@ vendor/lib64/vendor.qti.hardware.radio.qtiradio@2.1.so
 vendor/lib64/vendor.qti.hardware.radio.qtiradio@2.2.so
 vendor/lib64/vendor.qti.hardware.radio.qtiradio@2.3.so
 vendor/lib64/vendor.qti.hardware.radio.qtiradio@2.4.so
+vendor/lib64/vendor.qti.hardware.radio.qtiradio@2.5.so
+vendor/lib64/vendor.qti.hardware.radio.qtiradio@2.6.so
 vendor/lib64/vendor.qti.hardware.radio.uim@1.0.so
 vendor/lib64/vendor.qti.hardware.radio.uim@1.1.so
 vendor/lib64/vendor.qti.hardware.radio.uim@1.2.so
