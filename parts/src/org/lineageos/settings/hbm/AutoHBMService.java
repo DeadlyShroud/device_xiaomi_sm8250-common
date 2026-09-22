@@ -26,6 +26,7 @@ import java.util.concurrent.Future;
 public class AutoHBMService extends Service {
     private static final String HBM = "/sys/class/drm/card0/card0-DSI-1/disp_param";
     private static final String BACKLIGHT = "/sys/class/backlight/panel0-backlight/brightness";
+    private static final String SAVED_BRIGHTNESS = "hbm_saved_brightness";
 
     private static boolean mAutoHBMActive = false;
     private ExecutorService mExecutorService;
@@ -54,11 +55,21 @@ public class AutoHBMService extends Service {
 
     private void enableHBM(boolean enable) {
         if (enable) {
+            int current = Settings.System.getInt(getContentResolver(),
+                    Settings.System.SCREEN_BRIGHTNESS, 255);
+            mSharedPrefs.edit().putInt(SAVED_BRIGHTNESS, current).apply();
             FileUtils.writeLine(HBM, "0x10000");
             FileUtils.writeLine(BACKLIGHT, "2047");
             Settings.System.putInt(getContentResolver(), Settings.System.SCREEN_BRIGHTNESS, 255);
         } else {
             FileUtils.writeLine(HBM, "0xF0000");
+            int saved = mSharedPrefs.getInt(SAVED_BRIGHTNESS, -1);
+            if (saved >= 0) {
+                Settings.System.putInt(getContentResolver(),
+                        Settings.System.SCREEN_BRIGHTNESS, saved);
+                FileUtils.writeLine(BACKLIGHT, String.valueOf(saved * 2047 / 255));
+                mSharedPrefs.edit().remove(SAVED_BRIGHTNESS).apply();
+            }
         }
     }
 

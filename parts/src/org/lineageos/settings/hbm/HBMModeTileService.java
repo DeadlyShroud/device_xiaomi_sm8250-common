@@ -37,6 +37,7 @@ public class HBMModeTileService extends TileService {
     private static final String HBM = "/sys/class/drm/card0/card0-DSI-1/disp_param";
     private static final String HBM_KEY = "hbm";
     private static final String BACKLIGHT = "/sys/class/backlight/panel0-backlight/brightness";
+    private static final String SAVED_BRIGHTNESS = "hbm_saved_brightness";
 
     private BroadcastReceiver screenStateReceiver = new BroadcastReceiver() {
         @Override
@@ -89,10 +90,22 @@ public class HBMModeTileService extends TileService {
             return;
         }
         final boolean enabled = !(sharedPrefs.getBoolean(HBM_KEY, false));
-        FileUtils.writeLine(HBM, enabled ? "0x10000" : "0xF0000");
         if (enabled) {
+            int current = Settings.System.getInt(getContentResolver(),
+                    Settings.System.SCREEN_BRIGHTNESS, 255);
+            sharedPrefs.edit().putInt(SAVED_BRIGHTNESS, current).apply();
             FileUtils.writeLine(BACKLIGHT, "2047");
             Settings.System.putInt(getContentResolver(), Settings.System.SCREEN_BRIGHTNESS, 255);
+        }
+        FileUtils.writeLine(HBM, enabled ? "0x10000" : "0xF0000");
+        if (!enabled) {
+            int saved = sharedPrefs.getInt(SAVED_BRIGHTNESS, -1);
+            if (saved >= 0) {
+                Settings.System.putInt(getContentResolver(),
+                        Settings.System.SCREEN_BRIGHTNESS, saved);
+                FileUtils.writeLine(BACKLIGHT, String.valueOf(saved * 2047 / 255));
+                sharedPrefs.edit().remove(SAVED_BRIGHTNESS).apply();
+            }
         }
         sharedPrefs.edit().putBoolean(HBM_KEY, enabled).commit();
         updateUI(enabled);
