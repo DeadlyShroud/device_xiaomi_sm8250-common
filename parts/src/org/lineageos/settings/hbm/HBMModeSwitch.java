@@ -30,6 +30,7 @@ import org.lineageos.settings.display.*;
 public class HBMModeSwitch implements OnPreferenceChangeListener {
     private static final String HBM = "/sys/class/drm/card0/card0-DSI-1/disp_param";
     private static final String BACKLIGHT = "/sys/class/backlight/panel0-backlight/brightness";
+    private static final String SAVED_BRIGHTNESS = "hbm_saved_brightness";
     private Context mContext;
 
     public HBMModeSwitch(Context context) {
@@ -57,10 +58,23 @@ public class HBMModeSwitch implements OnPreferenceChangeListener {
     	if (dcDimmingEnabled) {
             return false;
         }
-        FileUtils.writeLine(getHBM(), enabled ? "0x10000" : "0xF0000");
+        SharedPreferences prefs = PreferenceManager.getDefaultSharedPreferences(mContext);
         if (enabled) {
+            int current = Settings.System.getInt(mContext.getContentResolver(),
+                    Settings.System.SCREEN_BRIGHTNESS, 255);
+            prefs.edit().putInt(SAVED_BRIGHTNESS, current).apply();
             FileUtils.writeLine(getBACKLIGHT(), "2047");
             Settings.System.putInt(mContext.getContentResolver(), Settings.System.SCREEN_BRIGHTNESS, 255);
+        }
+        FileUtils.writeLine(getHBM(), enabled ? "0x10000" : "0xF0000");
+        if (!enabled) {
+            int saved = prefs.getInt(SAVED_BRIGHTNESS, -1);
+            if (saved >= 0) {
+                Settings.System.putInt(mContext.getContentResolver(),
+                        Settings.System.SCREEN_BRIGHTNESS, saved);
+                FileUtils.writeLine(getBACKLIGHT(), String.valueOf(saved * 2047 / 255));
+                prefs.edit().remove(SAVED_BRIGHTNESS).apply();
+            }
         }
         return true;
     }
