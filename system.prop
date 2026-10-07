@@ -49,3 +49,9 @@ debug.renderengine.blur_algorithm=kawase2_fix_aliasing
 
 # Zygote
 persist.device_config.runtime_native.usap_pool_enabled=true
+
+#InfinityX
+ro.infinity.soc=Snapdragon 870 5G
+ro.infinity.battery=4500 mAh
+ro.infinity.display=1080 x 2400, 120 Hz
+ro.infinity.camera=64/48MP + 8MP + 2MP
